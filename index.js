@@ -1,9 +1,16 @@
 const express = require('express');
-const routes = require('./src/routes');
+
 
 const app = express();
 
-routes(app);
+// Middlewares
+require('./src/middlewares/content-type')(app);
+
+// Routes
+require('./src/routes')(app);
+
+// Middlewares
+require('./src/middlewares/errors')(app);
 
 app.listen(3000, () => { 
     console.log('Server is running on port 3000');
